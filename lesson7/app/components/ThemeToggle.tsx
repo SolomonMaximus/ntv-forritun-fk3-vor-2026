@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 
-type Theme = 'light' | 'dark';
+type Theme = "light" | "dark";
 
 function getInitialTheme(): Theme {
-  if (typeof document === 'undefined') return 'light';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+  if (typeof document === "undefined") return "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 function applyTheme(theme: Theme) {
-  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.setAttribute("data-theme", theme);
 }
 
 export function ThemeToggle() {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function ThemeToggle() {
   }, [theme, mounted]);
 
   const toggle = () => {
-    setThemeState((t) => (t === 'light' ? 'dark' : 'light'));
+    setThemeState((t) => (t === "light" ? "dark" : "light"));
   };
 
   if (!mounted) {
@@ -44,10 +45,10 @@ export function ThemeToggle() {
       type="button"
       className="theme-toggle"
       onClick={toggle}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+      title={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
     >
-      {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+      {theme === "light" ? "🌙 Dark" : "☀️ Light"}
     </button>
   );
 }

@@ -6,6 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { ThemeProvider } from "./context/ThemeContext";
 
 import appStyles from "./app.css?url";
 
@@ -16,7 +17,10 @@ export const links: LinksFunction = () => [
 export function meta() {
   return [
     { title: "Remix Theme App" },
-    { name: "description", content: "Simple Remix app with light and dark theme" },
+    {
+      name: "description",
+      content: "Simple Remix app with light and dark theme",
+    },
   ];
 }
 
@@ -30,7 +34,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <ThemeProvider>
+          <Outlet />
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
