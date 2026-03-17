@@ -1,30 +1,46 @@
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from '@remix-run/node';
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+<<<<<<< HEAD
 } from "@remix-run/react";
 import { ThemeProvider } from "./context/ThemeContext";
+=======
+} from '@remix-run/react';
+import { createContext, useContext, useState } from 'react';
+>>>>>>> upstream/main
 
-import appStyles from "./app.css?url";
+type Theme = 'light' | 'dark';
+export const ThemeContext = createContext<Theme | null>(null);
+
+import appStyles from './app.css?url';
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: appStyles },
+  { rel: 'stylesheet', href: appStyles },
 ];
 
 export function meta() {
   return [
+<<<<<<< HEAD
     { title: "Remix Theme App" },
     {
       name: "description",
       content: "Simple Remix app with light and dark theme",
+=======
+    { title: 'Remix Theme App' },
+    {
+      name: 'description',
+      content: 'Simple Remix app with light and dark theme',
+>>>>>>> upstream/main
     },
   ];
 }
 
 export default function App() {
+  const [theme, setTheme] = useState<Theme>('light');
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -34,11 +50,19 @@ export default function App() {
         <Links />
       </head>
       <body>
+<<<<<<< HEAD
         <ThemeProvider>
           <Outlet />
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
+=======
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+        </ThemeContext.Provider>
+>>>>>>> upstream/main
       </body>
     </html>
   );
