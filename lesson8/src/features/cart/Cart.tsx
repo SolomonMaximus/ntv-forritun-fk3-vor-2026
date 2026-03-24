@@ -20,7 +20,7 @@ export function Cart() {
             ))}
           </ul>
           <aside>
-            <CartSummary items={items} />
+            <CartSummary />
           </aside>
         </div>
       )}
