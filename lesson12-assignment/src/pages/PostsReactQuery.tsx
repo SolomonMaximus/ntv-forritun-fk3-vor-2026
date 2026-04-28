@@ -28,7 +28,7 @@ export function PostsReactQuery() {
     return (
       <div style={{ backgroundColor: "red", color: "white", padding: "1rem" }}>
         <p>Error: {error.message}</p>
-        <button onClick={refetch}>Try again</button>
+        <button onClick={() => refetch()}>Try again</button>
       </div>
     );
   }
@@ -39,7 +39,7 @@ export function PostsReactQuery() {
 
   return (
     <div>
-      {data.map((post) => ( 
+      {data.map((post) => (
         <div key={post.id}>
           <h3>{post.title}</h3>
           <p>{post.body}</p>
@@ -47,8 +47,7 @@ export function PostsReactQuery() {
       ))}
     </div>
   );
-}
- 
+
   const posts: Post[] = [];
   return (
     <div>
