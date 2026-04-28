@@ -1,8 +1,17 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-import App from './App.tsx';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App.tsx";
+import { logger } from "@/shared/lib/logger";
+
+window.addEventListener("error", (event) => {
+  logger.error("Global error caught", event.error);
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+  logger.error("Unhandled promise rejection caught", event.reason);
+});
 
 // TODO: Register two global error listeners on `window` so no error goes
 // unreported, even ones React cannot catch:
@@ -15,7 +24,7 @@ import App from './App.tsx';
 // Each listener should call `logger.error(...)` with a descriptive message
 // and the actual error/reason from the event object.
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <App />
