@@ -28,6 +28,18 @@ describe("Team Task Hub", () => {
     cy.contains("Write Cypress test").should("be.visible");
     cy.contains("Check the main project task flow").should("be.visible");
 
+    cy.findByLabelText(/edit task/i).click();
+
+    cy.findByRole("dialog").within(() => {
+      cy.contains(/edit task/i).should("be.visible");
+      cy.findByLabelText(/task title/i)
+        .clear()
+        .type("Updated Cypress task");
+      cy.contains("button", /save changes/i).click();
+    });
+
+    cy.contains("Updated Cypress task").should("be.visible");
+
     cy.findByRole("checkbox").click();
     cy.findByRole("checkbox").should("have.attr", "aria-checked", "true");
   });
