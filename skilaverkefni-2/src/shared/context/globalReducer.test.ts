@@ -91,3 +91,37 @@ describe("globalReducer", () => {
     expect(state.activeProject?.tasksCount).toBe(0);
   });
 });
+
+it("keeps a project when its task count is updated to zero", () => {
+  const project = {
+    id: "project-1",
+    name: "Website project",
+    description: "Build a website",
+    tasksCount: 1,
+  };
+
+  const startState = {
+    projects: [project],
+    tasks: [],
+    activeProject: project,
+  };
+
+  const state = globalReducer(startState, {
+    type: "UPDATE_PROJECT_TASKS_COUNT",
+    payload: {
+      projectId: project.id,
+      tasksCount: 0,
+    },
+  });
+
+  expect(state.projects).toEqual([
+    {
+      ...project,
+      tasksCount: 0,
+    },
+  ]);
+  expect(state.activeProject).toEqual({
+    ...project,
+    tasksCount: 0,
+  });
+});
